@@ -27,6 +27,12 @@ describe DockingStation do
     it "returns an error when try to release_bike from empty docking station" do
       expect { subject.release_bike }.to raise_error "No bikes available"
     end
+    it 'does not release broken bikes' do 
+      b1 = Bike.new
+      b1.report_broken
+      subject.dock(b1)
+      expect { subject.release_bike }.to raise_error "No working bikes available"
+    end
 
     # want to write a test that verifies you can release a bike
   end
@@ -38,7 +44,6 @@ describe DockingStation do
       expect { subject.dock(Bike.new) }.to raise_error "Docking station full"
     end
   end
-
 
   describe "capacity" do
     it 'initializes with a default capacity of 20' do 
