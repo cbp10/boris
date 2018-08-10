@@ -8,14 +8,24 @@ class DockingStation
   end
 
   def release_bike
-  #  Bike.new
-  raise "No bikes available" if @bike_array.empty?
+  raise "No bikes available" if empty?
   @bike_array.pop
   end
 
   def dock(bike)
-    raise "Docking station full" if @bike_array.count >= 20
+    raise "Docking station full" if full?
     @bike_array << bike
+  end
+
+
+  private
+  
+  def empty?
+    @bike_array.count == 0
+  end
+
+  def full?
+    @bike_array.count >= 20
   end
 
 #  def show_bike
