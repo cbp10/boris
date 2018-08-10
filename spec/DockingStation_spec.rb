@@ -37,17 +37,18 @@ describe DockingStation do
       20.times { subject.dock Bike.new }
       expect { subject.dock(Bike.new) }.to raise_error "Docking station full"
     end
+  end
 
-    describe "capacity" do
-    it 'responds to full with a boolean' do 
-      expect(subject.full?).to be false
-    end 
-    it 'checks if full' do
-      20.times{subject.dock(Bike.new)}
-      expect(subject.full?).to be true
+
+  describe "capacity" do
+    it 'initializes with a default capacity of 20' do 
+      expect(subject.capacity).to eq 20
+    end
+
+    it 'allows variable capacity to be set on initialization' do
+      ds1 = DockingStation.new(30)
+      expect(ds1.capacity).to eq 30 
     end
   end
 
-    # Want to add test that checks the size of the bike_array when we call is n times
-  end
 end
